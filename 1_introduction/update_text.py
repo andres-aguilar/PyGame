@@ -7,22 +7,16 @@ import pygame
 
 pygame.init()
 
-width = 400
-height = 500
+width, height = 400, 500
 
 surface = pygame.display.set_mode( (width, height) )
-pygame.display.set_caption('Colors')
+pygame.display.set_caption('Update text')
 
-# RBG
+# Colors
 red = pygame.Color(115, 38, 80)
 white = pygame.Color(255, 255, 255)
-green = pygame.Color(0, 200, 0)
 
-rect = pygame.Rect(100, 150, 120, 60)  
-rect.center = ( width//2, height//2 )
-
-# También se pueden definir rectangulos por medio de una tupla
-rect2 = (100, 100, 80, 40)  
+font = pygame.font.Font('freesansbold.ttf', 36)
 
 while True:
     for event in pygame.event.get():
@@ -30,7 +24,12 @@ while True:
             pygame.quit()
             sys.exit()
 
+    seconds = pygame.time.get_ticks() // 1000
+    text = font.render(str(seconds), True, red)
+    rect = text.get_rect()
+    rect.center = (width//2, height//2)
+
     surface.fill(white)
-    pygame.draw.rect(surface, red, rect)
-    pygame.draw.rect(surface, green, rect2)
+    surface.blit(text, rect)
+
     pygame.display.update()

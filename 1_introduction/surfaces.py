@@ -11,14 +11,19 @@ width = 400
 height = 500
 
 surface = pygame.display.set_mode( (width, height) )
-pygame.display.set_caption('Colors')
+pygame.display.set_caption('Surfaces')
 
-# RBG
+# Colors
 red = pygame.Color(115, 38, 80)
 white = pygame.Color(255, 255, 255)
 green = pygame.Color(0, 200, 0)
 blue = pygame.Color(0, 0, 200)
 
+surface2 = pygame.Surface( (200, 200) )
+surface2.fill(green)
+
+rect = surface2.get_rect()
+rect.center = ( width//2, height//2 )
 
 while True:
     for event in pygame.event.get():
@@ -28,10 +33,7 @@ while True:
 
     surface.fill(white)
 
-    pygame.draw.rect(surface, red, (100, 100, 80, 40))
-    # lienzo, color, (x, y), radio (px)
-    pygame.draw.circle(surface, green, (200, 300), 100)
-    # lienzo, color, inicio(x, y), fin(x, y), grosor (px)
-    pygame.draw.line(surface, blue, (100, 100), (200, 300), 2)
+    surface.blit(surface2, rect )
+    pygame.draw.rect( surface2, red, (100, 50, 80, 40) )
 
     pygame.display.update()
